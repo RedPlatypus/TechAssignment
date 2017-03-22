@@ -1,7 +1,7 @@
 console.log("Part 2");
 /*
 By: Brendan Robertson, March 17, 2017
-For: AEQ Technologies
+For: Aequilibrium
 */
 Array.prototype.contains = function(object){
 	for (i = 0; i < this.length; i++) {
@@ -11,26 +11,29 @@ Array.prototype.contains = function(object){
 };
 
 class Transformer {
-	constructor(transformer){
-		var specialBots = ["Optimus Prime", "Predaking"];
-		this.name = transformer.name;
-		this.strength = transformer.strength || 1;
-		this.intelligence = transformer.intelligence || 1;
-		this.speed = transformer.speed || 1;
-		this.endurance = transformer.endurance || 1;
-		this.firepower = transformer.firepower || 1;
-		this.rank = transformer.rank || 1;
-		this.courage = transformer.courage || 1;
-		this.skill = transformer.skill || 1;
-		if (transformer.allegiance != "D" && transformer.allegiance != "A") {
-			console.warn(transformer.name + " is a roge opperative. They should choose a side if they wish to participate in battle senarios.");
-			this.allegiance = "Rogue opperative";
-		} else{
-			this.allegiance = transformer.allegiance;
-		}
-		this.destroyed = transformer.destroyed || false;
-		this.battlesWon = transformer.battlesWon || 0; // incase we decide to re-run
-		if (specialBots.contains(this.name)) {
+	constructor(options){
+		const SPECIAL_BOTS = ["Optimus Prime", "Predaking"];
+		let defaults = {
+			strength: 		1,
+			intelligence: 	1,
+			speed: 			1,
+			endurance: 		1,
+			firepower: 		1,
+			rank: 			1,
+			courage: 		1,
+			skill: 			1,
+			allegiance: 	"Rogue opperative",
+			isSpecial: 		false,
+			destroyed: 		false,
+			battlesWon: 	0
+		};
+		
+		Object.assign(this, defaults, options);
+
+		if (this.allegiance != "D" && this.allegiance != "A") {
+			console.warn(`${this.name} must be a Decepticon or Autobot to participate in battle senarios. Allegiance: ${this.allegiance}`);
+		} 
+		if (SPECIAL_BOTS.contains(this.name)) {
 			this.isSpecial = true;
 		}
 	}
@@ -52,10 +55,10 @@ class Transformer {
 
 class Team {
 	//any side
-	constructor(name){
+	constructor(name = "", operatives = []){
 		//build your team
-		this.name = name || "Rogue";
-		this.operatives = [];
+		this.name = name;
+		this.operatives = operatives;
 		this.launch = -1; // which operative is next out.
 	}
 	addUnit(unit){
@@ -280,9 +283,10 @@ class WarZone {
 	}
 };
 
-// Call runBattles from wherever on a group of transformers.
-var battle = new WarZone(transformers);
-battle.toggleCommentary();	// gets active reports of battle.
+// Call runBattles from wherever on the warzone
+var battle = new WarZone(transformers2);
+// var battle = new WarZone(transformers); // run with a different group of transformers.
+// battle.toggleCommentary();	// gets active reports of battle.
 battle.runBattles();				// runs the battles
 // battle.reportTeams();		//report teams, and current status
 // battle.reportFights(); 		// 1 battle
