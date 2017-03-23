@@ -132,47 +132,48 @@ LandArray._checkLast = function(){
 
 //pass in `true` as 2nd parameter to see this.logging output.
 //EX to get logging: LandArray.getPeaksAndValleys(landStretch, true);
+//Expected results in ()
 
-var landStretch = [2,2,3,4,3,3,2,2,1,1,2,5]; // should be 4
+var landStretch = [2,2,3,4,3,3,2,2,1,1,2,5]; 
 console.log("[2,2,3,4,3,3,2,2,1,1,2,5] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2]; // should be 6
+var landStretch = [2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2]; 
 console.log("[2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2] (6) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
 
-var landStretch = [2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2]; // should be 6
+var landStretch = [2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2]; 
 console.log("[2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2] (6) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
 
-var landStretch = [1,2,1,2]; // should be 4
+var landStretch = [1,2,1,2]; 
 console.log("[1,2,1,2] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-landStretch = [1,2,1,2,3]; // should be 4
+landStretch = [1,2,1,2,3]; 
 console.log("[1,2,1,2,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
 
-landStretch = [1,2,1,2,3,3]; // should be 3
+landStretch = [1,2,1,2,3,3]; 
 console.log("[1,2,1,2,3,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-landStretch = [1,1,1,1,1,1]; // should be 3
+landStretch = [1,1,1,1,1,1]; 
 console.log("[1,1,1,1,1,1] (1) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [3,2,1]; // should be 2
+var landStretch = [3,2,1]; 
 console.log("[3,2,1] (2) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [3,2,1,1,1]; // should be 2
+var landStretch = [3,2,1,1,1]; 
 console.log("[3,2,1,1,1] (2) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-landStretch = [1,2,1,2,3,4]; // should be 4
+landStretch = [1,2,1,2,3,4]; 
 console.log("[1,2,1,2,3,4] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [1,2,1,2,3,40,3]; // should be 5
+var landStretch = [1,2,1,2,3,40,3]; 
 console.log("[1,2,1,2,3,40,3] (5) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [5,2,1,2,3,40,3]; // should be 5
+var landStretch = [5,2,1,2,3,40,3]; 
 console.log("[5,2,1,2,3,40,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
-var landStretch = [2,2,1,2,3,40,3]; // should be 5
+var landStretch = [2,2,1,2,3,40,3]; 
 console.log("[2,2,1,2,3,40,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
 
