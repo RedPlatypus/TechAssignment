@@ -1,13 +1,6 @@
 console.log("Part 1");
 /*
-Aequilibrium is in the business of building castles (we really aren’t, but let’s pretend). Now, we also believe in
-quality aesthetics, so we only want to build castles in two types of places:
-a. Peaks
-b. Valleys
-Let’s say you have an array of integers that describes a stretch of land, where each integer represents the
-current height of the land. Can you write a function that reads that array and returns the number of castles
-that Aequilibrium should build on that stretch of land?
-You can assume that you can always build a castle at the start of the array.
+Search for peaks and valleys accross an array.
 */
 
 function LandArray(){}; 
@@ -32,7 +25,7 @@ LandArray.getPeaksAndValleys = function(heights = [], logging = false){
 		//check last index. This method is based on looking backwards to tell us if we are on a peak or valley, so special check for last entry.
 		if (index === heights.length - 1) { 
 			this._checkLast();
-			//no continue, because we are still checking trend for last values
+			//no continue, because we are still checking trend change for last values
 		};
 
 		//if state check doesn't pan out, check the trend.
@@ -44,6 +37,7 @@ LandArray.getPeaksAndValleys = function(heights = [], logging = false){
 
 		//call appropriate method depending on current state
 		this.state > 0 ? this._rising() : this.state < 0 ? this._falling() : this._flat();
+
 		if(this.transition){
 			this._setPastValues();	
 			this._buildCastel();
@@ -130,54 +124,43 @@ LandArray._checkLast = function(){
 }
 
 
-//pass in `true` as 2nd parameter to see this.logging output.
-//EX to get logging: LandArray.getPeaksAndValleys(landStretch, true);
-//Expected results in ()
-
-var landStretch = [2,2,3,4,3,3,2,2,1,1,2,5]; 
-console.log("[2,2,3,4,3,3,2,2,1,1,2,5] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2]; 
-console.log("[2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2] (6) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-
-var landStretch = [2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2]; 
-console.log("[2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2] (6) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-
-var landStretch = [1,2,1,2]; 
-console.log("[1,2,1,2] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-landStretch = [1,2,1,2,3]; 
-console.log("[1,2,1,2,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-
-landStretch = [1,2,1,2,3,3]; 
-console.log("[1,2,1,2,3,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-landStretch = [1,1,1,1,1,1]; 
-console.log("[1,1,1,1,1,1] (1) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [3,2,1]; 
-console.log("[3,2,1] (2) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [3,2,1,1,1]; 
-console.log("[3,2,1,1,1] (2) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-landStretch = [1,2,1,2,3,4]; 
-console.log("[1,2,1,2,3,4] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [1,2,1,2,3,40,3]; 
-console.log("[1,2,1,2,3,40,3] (5) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [5,2,1,2,3,40,3]; 
-console.log("[5,2,1,2,3,40,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
-
-var landStretch = [2,2,1,2,3,40,3]; 
-console.log("[2,2,1,2,3,40,3] (4) returns : " + LandArray.getPeaksAndValleys(landStretch));
 
 
 
 
+/*********** Tests **************/
 
+function runTests(){
+	//data 
+	var errors = 0;
+	var tests = [
+		[[2,2,3,4,3,3,2,2,1,1,2,5], 4],
+		[[2,2,3,3,4,4,3,3,2,2,1,1,2,5,3,1,1,2], 6],
+		[[2,2,2,3,3,3,4,4,4,4,3,3,3,3,2,2,2,2,1,1,1,2,2,2,5,5,5,3,3,3,1,1,2,2,2], 6],
+		[[1,2,1,2], 4],
+		[[1,2,1,2,3], 4],
+		[[1,2,1,2,3,3], 4],
+		[[1,2,1,2,3,3,3], 4],
+		[[1,1,1,1,1,1,1,1], 1],
+		[[3,2,1], 2],
+		[[3,2,1,1,1,1,1,1], 2],
+		[[1,2,1,2,3,4], 4],
+		[[1,2,1,2,3,40,3], 5],
+		[[5,2,1,2,3,40,3], 4],
+		[[2,2,1,2,3,40,3], 4],
+		[[2,2,1,2,3,2,1,1,3], 5],
+		[[2,2,1,2,3,4,2,3], 5]
+	];
+	for(let [ array, expected ] of tests){
+		var result = LandArray.getPeaksAndValleys(array);
+		if(result === expected){
+			console.log(`${array} | Expected: ${expected}. Got ${result}. Pass`);
+		} else{
+			errors++;
+			console.warn(`FAILED: ${array} result ${result}. Should be: ${expected} `);
+		}
+	}
+	console.log(`${tests.length - errors} of ${tests.length} passed`);
+};
 
+runTests();
