@@ -18,7 +18,39 @@ Expected results shown in (brackets) in console
 
 ## Part 2
 
-Instantiate your WarZone class with a group of transformers
+Instantiate your WarZone class with a group of transformers. 
+Set allegiance to either *A* or *D*, anything else throws an exception. 
+If you don't set an attribue, it defaults to 1.
+
+Example:
+```
+let my_custom_transformers = [
+	{
+		name: "Pounce",
+		allegiance: "Rogue",
+		strength: 5,
+		intelligence: 7,
+		speed: 4,
+		endurance: 5,
+		rank: 6,
+		courage: 8,
+		firepower: 7,
+		skill: 10
+	},
+	{
+		name: "Sandstorm",
+		allegiance: "D",
+		strength: 7,
+		intelligence: 9,
+		speed: 6,
+		endurance: 7,
+		rank: 6,
+		courage: 10,
+		firepower: 6,
+		skill: 9
+	}
+];
+```
 
 ```javascript 
 var battle = new WarZone(transformers);
