@@ -23,7 +23,7 @@ Set allegiance to either *A* or *D*, anything else throws an exception.
 If you don't set an attribue, it defaults to 1.
 
 Example:
-```
+```javascript
 let my_custom_transformers = [
 	{
 		name: "Pounce",
@@ -53,7 +53,7 @@ let my_custom_transformers = [
 ```
 
 ```javascript 
-var battle = new WarZone(transformers);
+var battle = new WarZone(my_custom_transformers);
 battle.toggleCommentary();	// gets active reports as fights happen
 battle.runBattles();		// runs the battles
 battle.reportTeams();		// report teams, and current status
